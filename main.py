@@ -4,7 +4,7 @@ def main(page: ft.Page):
     page.theme_mode=ft.ThemeMode.LIGHT
     page.title = "Ejercicio de prueba ñejeje"
     
-    page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!"))
+    page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!", size=50, color=ft.Colors.BLUE))
     page.add(ft.Text(value="¡Una aplicacion dedicada a que tengas un control y manejo de tus horarios de eventos!"))
     
     #textField
