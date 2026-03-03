@@ -29,6 +29,9 @@ def main(page: ft.Page):
     )
     page.add(nombre)
     
+    fecha = ft.Text("Fecha del evento")
+    pass
+    
     tipo = ft.Dropdown(
         value = "Conferencia",
         label = "Tipo de evento",
@@ -55,15 +58,21 @@ def main(page: ft.Page):
     page.add(inscripcion)
     
     
-    txt_valor = ft.Text(value = "1Hr", size = 25)
     
     page.add(ft.Text("Duracion de el evento"))
     duracion = ft.Slider(
-        min=1,
+        min=0,
         max=8,
-        value=1
+        value=1,
+        divisions = 8,
+        label = "{value}"
     )
-    page.add(duracion, txt_valor)
+    page.add(duracion)
+
+    page.add(ft.Divider(height=10, thickness=2, color=ft.Colors.GREY_400))
+    page.add(ft.Row([
+        ft.VerticalDivider(width=10, thickness=2, color=ft.Colors.GREY_400)
+    ]))
     
     resumen = ft.Text(value="")
     page.add(resumen)
@@ -71,8 +80,9 @@ def main(page: ft.Page):
     def mostrar_resumen(e):
         resumen.value = "Evento: " + nombre.value + "\n"
         resumen.value += "Tipo: " + tipo.value + "\n"
+        resumen.value += "Requiere incsripcion (1 si, 0 no): " + str(int(inscripcion.value)) + "\n"
         resumen.value += "Modalidad: " + radio_group.value + "\n"
-        resumen.value += "Duracion: " + str(int(duracion.value)) + "\n"
+        resumen.value += "Duracion: " + str(int(duracion.value)) + "Hr" + "\n" 
         page.update()
     
     page.add(ft.ElevatedButton(
@@ -80,9 +90,9 @@ def main(page: ft.Page):
         on_click=mostrar_resumen
     ))
     
-    page.add(ft.Divider(height=10, thickness=2, color=ft.Colors.GREY_400))
-    page.add(ft.Row([
-        ft.VerticalDivider(width=10, thickness=2, color=ft.Colors.GREY_400)
-    ]))
+    
+    ft.ListView(
+        controls = []
+    )
     
 ft.run(main)
