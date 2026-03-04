@@ -55,22 +55,26 @@ def main(page: ft.Page):
     page.add(inscripcion)
     
     
-    txt_valor = ft.Text(value = "1Hr", size = 25)
-    
     page.add(ft.Text("Duracion de el evento"))
     duracion = ft.Slider(
-        min=1,
+        min=0,
         max=8,
-        value=1
+        value=1,
+        divisions = 8,
+        label = "{value}"
     )
-    page.add(duracion, txt_valor)
+    page.add(duracion)
     
     resumen = ft.Text(value="")
     page.add(resumen)
     page.add(ft.Text("Resumen de el evento!"))
     def mostrar_resumen(e):
         resumen.value = "Evento: " + nombre.value + "\n"
+        if nombre.value == "":
+            print("Favor de poner un evento")
+            return
         resumen.value += "Tipo: " + tipo.value + "\n"
+        resumen.value += "Requiere incsripcion (1 si, 0 no): " + str(int(inscripcion.value)) + "\n"
         resumen.value += "Modalidad: " + radio_group.value + "\n"
         resumen.value += "Duracion: " + str(int(duracion.value)) + "\n"
         page.update()
