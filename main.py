@@ -5,7 +5,7 @@ def main(page: ft.Page):
     page.title = "Ejercicio de prueba ñejeje"
     
     page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!", color=ft.Colors.BLUE, size=25))
-    page.add(ft.Text(value="Una aplicacion hecha para que puedas tener un control y seguimiento de tus eventos!", color=ft.Colors.GREEN, size= 15))
+    page.add(ft.Text(value="Una aplicacion hecha para que puedas tener un control y seguimiento de tus eventos!", color=ft.Colors.PINK_500, size= 15))
     
     #textField
     nombre =ft.TextField(
@@ -61,8 +61,8 @@ def main(page: ft.Page):
     ft.Text("Modalidad del evento")
     radio_group = ft.RadioGroup(
         content = ft.Column([
-            ft.Radio(label="Presencial🧑", value="Presencial"),
-            ft.Radio(label="Virtual💻", value="Virtual")
+            ft.Radio(label="Presencial", value="Presencial"),
+            ft.Radio(label="Virtual", value="Virtual")
         ]),
         on_change=lambda e: print(e.control.value)
     )
@@ -99,19 +99,20 @@ def main(page: ft.Page):
             print("Favor de poner un evento")
             return
         evento = (
-            "Evento🥳: " + nombre.value + "\n"
-            "Tipo de evento🕴️:  " + tipo.value + "\n"
+            "Evento: " + nombre.value + "\n"
+            "Tipo de evento:  " + tipo.value + "\n"
             "Modalidad del evento: " + radio_group.value + "\n"
             "Requiere inscripcion?: " + str(inscripcion.value) + "\n"
-            "Duracion del evento⏱️: " + str(int(duracion.value)) + "Hr " "\n" 
-            "Fecha📅: " + fecha_text.value 
+            "Duracion del evento⏱: " + str(int(duracion.value)) + "Hr " "\n" 
+            "Fecha: " + fecha_text.value 
         )
         lista_evento.controls.append(ft.Text(evento))
         page.update()
     
     page.add(ft.ElevatedButton(
         content=ft.Text("Mostrar resumen"),
-        on_click=mostrar_resumen
+        on_click=mostrar_resumen,
+        color = ft.Colors.PINK
     ))
     
 
