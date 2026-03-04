@@ -1,7 +1,7 @@
 [project]
 name = "registro"
 version = "0.1.0"
-description = "Add your description here"
+description = "Programa donde un usuario registar un evento y se le muestra una lista de resumen - 23308060610320 - RALA"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [

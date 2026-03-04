@@ -4,7 +4,8 @@ def main(page: ft.Page):
     page.theme_mode=ft.ThemeMode.LIGHT
     page.title = "Ejercicio de prueba ñejeje"
     
-    page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!"))
+    page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!", color=ft.Colors.BLUE, size=25))
+    page.add(ft.Text(value="Una aplicacion hecha para que puedas tener un control y seguimiento de tus eventos!", color=ft.Colors.GREEN, size= 15))
     
     #textField
     nombre =ft.TextField(
@@ -45,7 +46,7 @@ def main(page: ft.Page):
         
     boton_fecha = ft.ElevatedButton("Seleccionar fecha", on_click=calendario)
     page.add(boton_fecha, fecha_text)
-    
+    "\n"
     tipo = ft.Dropdown(
         value = "Conferencia",
         label = "Tipo de evento",
@@ -60,8 +61,8 @@ def main(page: ft.Page):
     ft.Text("Modalidad del evento")
     radio_group = ft.RadioGroup(
         content = ft.Column([
-            ft.Radio(label="Presencial", value="Presencial"),
-            ft.Radio(label="Virtual", value="Virtual")
+            ft.Radio(label="Presencial🧑", value="Presencial"),
+            ft.Radio(label="Virtual💻", value="Virtual")
         ]),
         on_change=lambda e: print(e.control.value)
     )
@@ -72,7 +73,7 @@ def main(page: ft.Page):
     page.add(inscripcion)
     
     
-    page.add(ft.Text("Duracion de el evento"))
+    page.add(ft.Text("Duracion de el evento en horas:)"))
     duracion = ft.Slider(
         min=0,
         max=8,
@@ -82,9 +83,9 @@ def main(page: ft.Page):
     )
     page.add(duracion)
     
-    page.add(ft.Divider(height=10, thickness=2, color=ft.Colors.GREY_400))
+    page.add(ft.Divider(height=30, thickness=2, color=ft.Colors.BLUE_400))
     page.add(ft.Row([
-        ft.VerticalDivider(width=10, thickness=2, color=ft.Colors.GREY_400)
+        ft.VerticalDivider(width=30, thickness=2, color=ft.Colors.BLUE_400)
     ]))
     
     lista_evento = ft.ListView(expand=True, spacing= 10)
@@ -98,12 +99,12 @@ def main(page: ft.Page):
             print("Favor de poner un evento")
             return
         evento = (
-            "Evento: " + nombre.value + " "
-            "Tipo de evento:  " + tipo.value + " "
-            "Modalidad del evento: " + radio_group.value + " "
-            "Requiere inscripcion?(1 si, 0 no): " + str(inscripcion.value) + " "
-            "Duracion del evento: " + str(int(duracion.value)) + "Hr " 
-            "Fecha: " + fecha_text.value 
+            "Evento🥳: " + nombre.value + "\n"
+            "Tipo de evento🕴️:  " + tipo.value + "\n"
+            "Modalidad del evento: " + radio_group.value + "\n"
+            "Requiere inscripcion?: " + str(inscripcion.value) + "\n"
+            "Duracion del evento⏱️: " + str(int(duracion.value)) + "Hr " "\n" 
+            "Fecha📅: " + fecha_text.value 
         )
         lista_evento.controls.append(ft.Text(evento))
         page.update()
