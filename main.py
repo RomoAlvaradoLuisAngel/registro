@@ -5,7 +5,6 @@ def main(page: ft.Page):
     page.title = "Ejercicio de prueba ñejeje"
     
     page.add(ft.Text(value="¡Bienvenido a tu aplicacion de registro de eventos!"))
-    page.add(ft.Text(value="¡Una aplicacion dedicada a que tengas un control y manejo de tus horarios de eventos!"))
     
     #textField
     nombre =ft.TextField(
@@ -28,6 +27,24 @@ def main(page: ft.Page):
     on_submit=lambda e: print("Enter presionado")
     )
     page.add(nombre)
+    
+    def calendario(e):
+        date_picker.open = True
+        page.update()
+    
+    fecha_text = ft.Text("Sin fecha seleccionada")
+    
+    def cambiar_fecha(e):
+        fecha_text.value = str(date_picker.value.date())
+        page.update()
+        
+    date_picker = ft.DatePicker(
+        on_change = cambiar_fecha
+    )
+    page.overlay.append(date_picker)
+        
+    boton_fecha = ft.ElevatedButton("Seleccionar fecha", on_click=calendario)
+    page.add(boton_fecha, fecha_text)
     
     tipo = ft.Dropdown(
         value = "Conferencia",
@@ -65,18 +82,30 @@ def main(page: ft.Page):
     )
     page.add(duracion)
     
+    page.add(ft.Divider(height=10, thickness=2, color=ft.Colors.GREY_400))
+    page.add(ft.Row([
+        ft.VerticalDivider(width=10, thickness=2, color=ft.Colors.GREY_400)
+    ]))
+    
+    lista_evento = ft.ListView(expand=True, spacing= 10)
+    page.add(lista_evento)
+    
     resumen = ft.Text(value="")
     page.add(resumen)
-    page.add(ft.Text("Resumen de el evento!"))
+    
     def mostrar_resumen(e):
-        resumen.value = "Evento: " + nombre.value + "\n"
         if nombre.value == "":
             print("Favor de poner un evento")
             return
-        resumen.value += "Tipo: " + tipo.value + "\n"
-        resumen.value += "Requiere incsripcion (1 si, 0 no): " + str(int(inscripcion.value)) + "\n"
-        resumen.value += "Modalidad: " + radio_group.value + "\n"
-        resumen.value += "Duracion: " + str(int(duracion.value)) + "\n"
+        evento = (
+            "Evento: " + nombre.value + " "
+            "Tipo de evento:  " + tipo.value + " "
+            "Modalidad del evento: " + radio_group.value + " "
+            "Requiere inscripcion?(1 si, 0 no): " + str(inscripcion.value) + " "
+            "Duracion del evento: " + str(int(duracion.value)) + "Hr " 
+            "Fecha: " + fecha_text.value 
+        )
+        lista_evento.controls.append(ft.Text(evento))
         page.update()
     
     page.add(ft.ElevatedButton(
@@ -84,9 +113,6 @@ def main(page: ft.Page):
         on_click=mostrar_resumen
     ))
     
-    page.add(ft.Divider(height=10, thickness=2, color=ft.Colors.GREY_400))
-    page.add(ft.Row([
-        ft.VerticalDivider(width=10, thickness=2, color=ft.Colors.GREY_400)
-    ]))
+
     
 ft.run(main)
